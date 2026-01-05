@@ -118,9 +118,10 @@ object TickTimers : Module(
 
         onReceive<ClientboundSetTimePacket> {
             if (!DungeonUtils.inClear) return@onReceive
+            if (DungeonUtils.inBoss) return@onReceive
             val gameTime = mc.level?.gameTime ?: -1
-            if (!DungeonUtils.inBoss) {
-                if (outboundsHud.enabled) outboundsTime = 40 - (gameTime % 40).toInt()
+            if (outboundsHud.enabled) {
+                outboundsTime = 40 - (gameTime % 40).toInt()
             }
             if (DungeonUtils.openRoomCount == 0) {
             } else {
