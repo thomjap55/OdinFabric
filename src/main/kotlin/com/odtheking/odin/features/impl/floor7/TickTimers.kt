@@ -15,6 +15,7 @@ import com.odtheking.odin.utils.skyblock.dungeon.DungeonUtils
 import com.odtheking.odin.utils.toFixed
 import net.minecraft.network.protocol.game.ClientboundSetTimePacket
 
+
 object TickTimers : Module(
     name = "Tick Timers",
     description = "Displays timers for Necron, Goldor, Storm, Outbounds and Secrets."
@@ -117,10 +118,10 @@ object TickTimers : Module(
         }
 
         fun isNotInBossRoom(): Boolean {
-            val player = MinecraftClient.getInstance().player ?: return false
+            val player = mc.player ?: return false
             return player.x < 0 && player.z < 0
         }
-        
+     
         onReceive<ClientboundSetTimePacket> {
             if (!DungeonUtils.inClear) return@onReceive
             if (!isNotInBossRoom()) return @onReceive
