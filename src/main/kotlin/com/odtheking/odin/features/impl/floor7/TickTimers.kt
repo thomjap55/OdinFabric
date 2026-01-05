@@ -116,8 +116,14 @@ object TickTimers : Module(
             if (necronTime >= 0 && necronHud.enabled) necronTime--
         }
 
+        fun isNotInBossRoom(): Boolean {
+            val player = MinecraftClient.getInstance().player ?: return false
+            return player.x < 0 && player.z < 0
+        }
+        
         onReceive<ClientboundSetTimePacket> {
             if (!DungeonUtils.inClear) return@onReceive
+            if (!isNotInBossRoom) return @onReceive
             val gameTime = mc.level?.gameTime ?: -1
             if (outboundsHud.enabled) outboundsTime = 40 - (gameTime % 40).toInt()
             if (DungeonUtils.openRoomCount == 0) {
