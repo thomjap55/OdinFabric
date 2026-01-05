@@ -119,9 +119,8 @@ object TickTimers : Module(
      
         onReceive<ClientboundSetTimePacket> {
             if (!DungeonUtils.inClear) return@onReceive
-            if (!isNotInBossRoom()) return@onReceive
             val gameTime = MinecraftClient.getInstance().world?.time ?: return@onReceive
-            if (outboundsHud.enabled) outboundsTime = 40 - (gameTime % 40).toInt()
+            if (outboundsHud.enabled && isNotInBossRoom) outboundsTime = 40 - (gameTime % 40).toInt()
             if (DungeonUtils.openRoomCount == 0) {
             } else {
                 if (secretsHud.enabled) secretsTime = 20 - (gameTime % 20).toInt()
@@ -147,9 +146,8 @@ object TickTimers : Module(
         val timeDisplay = if (displayInTicks) "$time${if (symbolDisplay) "t" else ""}" else "${(time / 20f).toFixed()}${if (symbolDisplay) "s" else ""}"
         return "${if (showPrefix) "$prefix " else ""}$color$timeDisplay"
     }
-}
-
-fun isNotInBossRoom(): Boolean {
-    val player = mc.player ?: return false
-    return player.x < 0 && player.z < 0
+    fun isNotInBossRoom(): Boolean {
+        val player = mc.player ?: return false
+        return player.x < 0 && player.z < 0
+    }
 }
