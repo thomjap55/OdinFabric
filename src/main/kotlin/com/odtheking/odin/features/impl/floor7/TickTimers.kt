@@ -116,11 +116,6 @@ object TickTimers : Module(
             if (lightningTickTime == 0 && lightningHud.enabled) lightningTickTime--
             if (necronTime >= 0 && necronHud.enabled) necronTime--
         }
-
-        fun isNotInBossRoom(): Boolean {
-            val player = mc.player ?: return false
-            return player.x < 0 && player.z < 0
-        }
      
         onReceive<ClientboundSetTimePacket> {
             if (!DungeonUtils.inClear) return@onReceive
@@ -152,4 +147,9 @@ object TickTimers : Module(
         val timeDisplay = if (displayInTicks) "$time${if (symbolDisplay) "t" else ""}" else "${(time / 20f).toFixed()}${if (symbolDisplay) "s" else ""}"
         return "${if (showPrefix) "$prefix " else ""}$color$timeDisplay"
     }
+}
+
+fun isNotInBossRoom(): Boolean {
+    val player = mc.player ?: return false
+    return player.x < 0 && player.z < 0
 }
