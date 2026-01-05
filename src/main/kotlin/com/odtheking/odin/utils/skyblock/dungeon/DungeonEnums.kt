@@ -35,14 +35,14 @@ enum class Puzzle(
     BLAZE("Higher Or Lower"),
     BEAMS("Creeper Beams"),
     WEIRDOS("Three Weirdos"),
-    TTT("Tic Tac Toe"),
-    WATER_BOARD("Water Board"),
+    T_T_T("Tic Tac Toe"),
+    W_B("Water Board"),
     TP_MAZE("Teleport Maze"),
     BOULDER("Boulder"),
-    ICE_FILL("Ice Fill"),
-    ICE_PATH("Ice Path"),
+    I_F("Ice Fill"),
+    I_P("Ice Path"),
     QUIZ("Quiz"),
-    BOMB_DEFUSE("Bomb Defuse");
+    B_D("Bomb Defuse");
 }
 
 sealed class PuzzleStatus {
@@ -70,7 +70,7 @@ enum class DungeonClass(
 ) {
     Archer(Colors.MINECRAFT_GOLD, '6', 0, 2),
     Berserk(Colors.MINECRAFT_DARK_RED, '4', 1, 0),
-    Healer(Colors.MINECRAFT_LIGHT_PURPLE, 'd', 2, 2),
+    Healer(com.odtheking.odin.utils.Color(0xFF, 0x66, 0xB2), 'f', 2, 2), // rose custom
     Mage(Colors.MINECRAFT_AQUA, 'b', 3, 2),
     Tank(Colors.MINECRAFT_DARK_GREEN, '2', 3, 1),
     Unknown(Colors.WHITE, 'f', 0, 0)
