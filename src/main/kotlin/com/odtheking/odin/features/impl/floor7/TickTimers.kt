@@ -120,7 +120,7 @@ object TickTimers : Module(
         onReceive<ClientboundSetTimePacket> {
             if (!DungeonUtils.inClear) return@onReceive
             if (!isNotInBossRoom()) return@onReceive
-            val gameTime = mc.level?.gameTime ?: -1
+            val gameTime = MinecraftClient.getInstance().world?.time ?: return@onReceive
             if (outboundsHud.enabled) outboundsTime = 40 - (gameTime % 40).toInt()
             if (DungeonUtils.openRoomCount == 0) {
             } else {
