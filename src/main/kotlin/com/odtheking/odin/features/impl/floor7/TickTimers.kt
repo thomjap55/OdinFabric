@@ -66,6 +66,7 @@ object TickTimers : Module(
     private var lightningTickTime = -1
 
     private val outboundsHud by HUD("Outbounds Hud", "Displays a timer for out of bounds death ticks.") {
+        if (DungeonUtils.inBoss) return@HUD 0 to 0
         if (it)                      textDim(formatTimer(15, 20, "§8Outbounds:"), 0, 0, Colors.MINECRAFT_DARK_RED)
         else if (outboundsTime >= 0) textDim(formatTimer(outboundsTime, 20, "§3Outbounds:"), 0, 0, Colors.MINECRAFT_DARK_RED)
         else 0 to 0
