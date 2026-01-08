@@ -145,8 +145,4 @@ object TickTimers : Module(
         val timeDisplay = if (displayInTicks) "$time${if (symbolDisplay) "t" else ""}" else "${(time / 20f).toFixed()}${if (symbolDisplay) "s" else ""}"
         return "${if (showPrefix) "$prefix " else ""}$color$timeDisplay"
     }
-    fun isNotInBossRoom(): Boolean {
-        val player = mc.player ?: return false
-        return player.x < 0 && player.z < 0
-    }
 }
